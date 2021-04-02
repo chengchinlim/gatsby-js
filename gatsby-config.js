@@ -5,6 +5,30 @@ module.exports = {
     author: `@gatsbyjs`,
   },
   plugins: [
+    {
+      resolve: 'gatsby-firesource',
+      options: {
+        credential: require("./config/learn-gatsby-5227-firebase.json"),
+        types: [
+          {
+            type: 'Book',
+            collection: 'books',
+            map: doc => ({
+              title: doc.title,
+              imageUrl: doc.imageUrl,
+              author___NODE: doc.author.id,
+            }),
+          },
+          {
+            type: 'Author',
+            collection: 'authors',
+            map: doc => ({
+              name: doc.name
+            }),
+          },
+        ],
+      },
+    },
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-image`,
     {
